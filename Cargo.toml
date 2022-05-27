@@ -1,0 +1,47 @@
+[package]
+name = "qai_template"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
+
+# faster compile time
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.profiling]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[dependencies]
+wasm-bindgen = "0.2.74"
+rayon = "1.5"
+wasm-bindgen-rayon = { version = "1.0", features = ["no-bundler"] }
+console_error_panic_hook = "0.1.7"
+
+
+[dependencies.polars]
+features = [
+  "dtype-full",
+  "list",
+  "mode",
+  "csv-file",
+  "rows",
+  "strings",
+  "browser",
+  "lazy",
+]
+default-features = false
+path = "../polars/polars"
+# git = "https://github.com/KivalM/polars"
+# branch = "wasm"
+
+[dependencies.web-sys]
+version = "0.3.56"
+features = [
+  "console"
+]
